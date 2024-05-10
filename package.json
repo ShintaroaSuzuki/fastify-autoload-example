@@ -1,0 +1,53 @@
+{
+  "name": "fastify-autoload-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node -r tsconfig-paths/register src/index.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/index.js",
+    "lint": "eslint src --fix --ext ts --config .eslintrc.js",
+    "typecheck": "tsc --noEmit --skipLibCheck --pretty",
+    "test": "jest --config jest.config.js",
+    "test:cov": "jest --config jest.config.js --colors --coverage",
+    "test:e2e": "jest --config jest.config.e2e.js",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/autoload": "^5.8.0",
+    "@fastify/swagger": "^8.14.0",
+    "@fastify/swagger-ui": "^3.0.0",
+    "@prisma/client": "5.13.0",
+    "fastify": "^4.26.2",
+    "json-schema-to-ts": "^3.0.1",
+    "ramda": "^0.30.0",
+    "ts-essentials": "^9.4.2",
+    "ts-pattern": "^5.1.1"
+  },
+  "devDependencies": {
+    "@tsconfig/strictest": "^2.0.5",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.12.7",
+    "@types/ramda": "^0.29.12",
+    "@typescript-eslint/parser": "^7.8.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-functional": "^6.5.1",
+    "eslint-plugin-import": "^2.29.1",
+    "husky": "^9.0.11",
+    "jest": "^29.7.0",
+    "jest-junit": "^16.0.0",
+    "prisma": "^5.13.0",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "tsconfig.json": "link:@tsconfig/strictest/tsconfig.json",
+    "typescript": "^5.1.6",
+    "typescript-eslint": "^7.8.0"
+  },
+  "resolutions": {
+    "typescript": "<=5.1.6"
+  }
+}

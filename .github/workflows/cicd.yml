@@ -1,0 +1,76 @@
+name: CI/CD
+on:
+  push:
+    branches:
+      - "main"
+      - "staging"
+      - "production"
+  pull_request:
+    types:
+      - "ready_for_review"
+    branches:
+      - "main"
+      - "staging"
+      - "production"
+env:
+  TZ: "Asia/Tokyo"
+jobs:
+  test:
+    name: Execute Test
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: mydb
+          MYSQL_USER: testuser
+          MYSQL_PASSWORD: mypassword
+          MYSQL_ROOT_PASSWORD: mypassword
+          TZ: "Asia/Tokyo"
+        ports:
+          - "3306:3306"
+        options: >-
+          --health-cmd "mysqladmin ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-env
+
+      - name: Execute migrate
+        run: |
+          pnpm prisma migrate deploy
+
+      - name: Generate Prisma Client
+        run: |
+          pnpm prisma generate
+
+      - name: Unit Test
+        run: |
+          pnpm test:cov
+
+      - name: E2E Test
+        run: |
+          pnpm test:e2e
+
+      - name: Jest coverage comment for Unit Test
+        if: always()
+        uses: MishaKav/jest-coverage-comment@main
+        with:
+          title: Unit Test
+          coverage-summary-path: ./apps/server/coverage/coverage-summary.json
+          coverage-path: ./apps/server/coverage/coverage.txt
+          junitxml-path: ./apps/server/coverage/junit.xml
+
+      - name: Jest coverage comment for Unit Test
+        if: always()
+        uses: MishaKav/jest-coverage-comment@main
+        with:
+          title: E2E Test
+          junitxml-path: ./apps/server/coverage/junit.e2e.xml
