@@ -6,10 +6,11 @@ import fastify from "fastify";
 import fastifyAutoLoad from "@/utils/fastifyAutoLoad";
 
 const PORT = 8080;
+const HOST = "0.0.0.0";
 
 const server = fastify();
 
-const init = async ({ port }: { port: number }) => {
+const init = async ({ host, port }: { host: string; port: number }) => {
   await server.register(fastifySwagger, {
     openapi: {
       openapi: "3.0.0",
@@ -37,7 +38,7 @@ const init = async ({ port }: { port: number }) => {
   }
   fs.writeFileSync("docs/openapi.yaml", responseYaml.payload);
 
-  server.listen({ port }, (err: Error | null, address: string) => {
+  server.listen({ host, port }, (err: Error | null, address: string) => {
     if (err != null) {
       console.error(err);
       process.exit(1);
@@ -46,4 +47,4 @@ const init = async ({ port }: { port: number }) => {
   });
 };
 
-init({ port: PORT });
+init({ host: HOST, port: PORT });
