@@ -93,6 +93,151 @@ paths:
                 properties:
                   error:
                     type: string
+  /posts/{userId}/:
+    get:
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: userId
+          required: true
+          description: ユーザーID
+      responses:
+        "200":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: 記事ID
+                    userId:
+                      type: string
+                      description: ユーザーID
+                    title:
+                      type: string
+                      description: タイトル
+                    content:
+                      type: string
+                      nullable: true
+                      description: 内容
+                    createdAt:
+                      type: string
+                      description: 作成日時
+              example:
+                - id: hoge1
+                  userId: user1
+                  title: testTitle
+                  content: null
+                  createdAt: 2024-05-16T08:23:42.123Z
+        "400":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "404":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: タイトル
+                content:
+                  type: string
+                  description: 記事
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: userId
+          required: true
+          description: ユーザーID
+      responses:
+        "200":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: 記事ID
+                  userId:
+                    type: string
+                    description: ユーザーID
+                  title:
+                    type: string
+                    description: タイトル
+                  content:
+                    type: string
+                    nullable: true
+                    description: 内容
+                  createdAt:
+                    type: string
+                    description: 作成日時
+              example:
+                id: hoge1
+                userId: user1
+                title: testTitle
+                content: null
+                createdAt: 2024-05-16T08:23:42.123Z
+        "400":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "404":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
   /users/{id}/:
     get:
       parameters:
