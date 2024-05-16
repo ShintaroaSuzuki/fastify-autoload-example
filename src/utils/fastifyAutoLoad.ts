@@ -7,6 +7,7 @@ export default async (fastify: FastifyInstance) => {
   await fastify.register(autoLoad, {
     dir: join(__dirname, "../routes"),
     routeParams: true,
-    matchFilter: (path: string) => path.split("/").at(-1) === "_handlers.ts",
+    matchFilter: (path: string) =>
+      path.split("/").at(-1)?.split(".").at(-2) === "_handlers",
   });
 };
