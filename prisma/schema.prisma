@@ -7,9 +7,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Users {
-  id String  @id @default(cuid()) 
+  id   String @id @default(cuid())
   name String
-  age Int
+  age  Int
+  
+  // Relation
+  Post Post[]
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  content   String?
+  createdAt DateTime @default(dbgenerated("(now(3))"))
+
+  // Relation
+  users Users @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

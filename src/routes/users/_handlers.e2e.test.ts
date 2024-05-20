@@ -1,5 +1,6 @@
 import fastify from "fastify";
 import fastifyAutoLoad from "@/utils/fastifyAutoLoad";
+import { refreshDatabase } from "@/utils/jest.e2e.setup";
 
 describe("/users", () => {
   const server = fastify();
@@ -7,6 +8,7 @@ describe("/users", () => {
   beforeAll(async () => {
     await server.register(fastifyAutoLoad);
     await server.ready();
+    await refreshDatabase();
   });
 
   afterEach(() => {

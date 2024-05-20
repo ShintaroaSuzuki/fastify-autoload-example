@@ -21,7 +21,6 @@
     "baseUrl": "./",
     "incremental": true,
     "exactOptionalPropertyTypes": false,
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }

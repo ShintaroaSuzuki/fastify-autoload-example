@@ -1,5 +1,6 @@
 import fastify from "fastify";
 import fastifyAutoLoad from "@/utils/fastifyAutoLoad";
+import { refreshDatabase } from "@/utils/jest.e2e.setup";
 
 type User = {
   id: string;
@@ -13,6 +14,7 @@ describe("/users/:id", () => {
   beforeAll(async () => {
     await server.register(fastifyAutoLoad);
     await server.ready();
+    await refreshDatabase();
   });
 
   afterEach(() => {

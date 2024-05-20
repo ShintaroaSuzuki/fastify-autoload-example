@@ -1,5 +1,4 @@
 module.exports = {
-  globalSetup: "<rootDir>/utils/jest.e2e.setup.ts",
   moduleNameMapper: {
     "@/(.*)": "<rootDir>/$1",
   },
@@ -17,4 +16,5 @@ module.exports = {
       { outputDirectory: "coverage", outputName: "junit.e2e.xml" },
     ],
   ],
+  maxWorkers: 1,
 };
