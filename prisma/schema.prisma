@@ -24,5 +24,5 @@ model Post {
   createdAt DateTime @default(dbgenerated("(now(3))"))
 
   // Relation
-  users Users @relation(fields: [userId], references: [id])
+  users Users @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
