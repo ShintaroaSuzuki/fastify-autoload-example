@@ -3,6 +3,7 @@ import fs from "fs";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
 import fastify from "fastify";
+import { errorHandler } from "./utils/errorHandler";
 import fastifyAutoLoad from "@/utils/fastifyAutoLoad";
 
 const PORT = 8080;
@@ -21,6 +22,8 @@ const init = async ({ host, port }: { host: string; port: number }) => {
       },
     },
   });
+
+  server.setErrorHandler(errorHandler);
 
   await server.register(fastifySwaggerUi, {
     routePrefix: "/docs",
