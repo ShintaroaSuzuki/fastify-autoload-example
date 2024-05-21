@@ -1,5 +1,5 @@
 import { FastifyRequest } from "fastify";
-import { BadRequestException } from "@/utils/customError";
+import { BadRequestException } from "@/utils/exceptions";
 
 /* eslint-disable functional/no-throw-statements */
 export const extractParamsForGetAllPost = ({

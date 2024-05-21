@@ -66,19 +66,25 @@ const schemas = {
       400: {
         type: "object",
         properties: {
+          statusCode: { type: "number" },
           error: { type: "string" },
+          message: { type: "string" },
         },
       } as const satisfies JSONSchema,
       404: {
         type: "object",
         properties: {
+          statusCode: { type: "number" },
           error: { type: "string" },
+          message: { type: "string" },
         },
       } as const satisfies JSONSchema,
       500: {
         type: "object",
         properties: {
+          statusCode: { type: "number" },
           error: { type: "string" },
+          message: { type: "string" },
         },
       },
     },
