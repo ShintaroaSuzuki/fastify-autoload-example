@@ -2,7 +2,7 @@ version: "3"
 
 services:
   mysql-server:
-    container_name: mysql-server
+    container_name: mysql-server-fastify
     image: mysql:8.0
     environment:
       MYSQL_DATABASE: mydb
